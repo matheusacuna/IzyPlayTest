@@ -1,43 +1,98 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class RotationKnife : MonoBehaviour
+
+namespace Player
 {
-    private Rigidbody rig;
-    [SerializeField] private MyInputsManager myInputsManager;
-
-    public float impulseForce;
-    public float rotationSpeed;
-    private bool canImpulse = false;
-    // Start is called before the first frame update
-    void Start()
+    public class RotationKnife : MonoBehaviour
     {
-        rig = GetComponent<Rigidbody>();
-    }
+        [Header("Inputs")]
+        [SerializeField] private MyInputsManager myInputsManager;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (myInputsManager.myInputs.Knife.Rotation.triggered)
+        [Header("Values Knife")]
+        public float rotationDuration;
+        public float torqueValue;    
+        public Vector2 jumpForce;
+        private bool canImpulse = false;
+    
+        private Rigidbody rig;
+        private bool canRotate = false;
+        private Quaternion targetRotation;
+    
+        void Start()
         {
-            canImpulse = true;
-        }
-    }
+            rig = GetComponent<Rigidbody>();
 
-    public void FixedUpdate()
-    {
-        if(canImpulse)
+            rig.isKinematic = true;
+        }
+
+        // Update is called once per frame
+        void Update()
         {
-            KickAndFlip();
-        }
-    }
-    private void KickAndFlip()
-    {
-        Vector3 moveY = new Vector3(1,3,0) * impulseForce;
-        rig.AddForce(moveY, ForceMode.Impulse);
-        canImpulse = false;
+            if (myInputsManager.myInputs.Knife.Rotation.triggered)
+            {
+                canImpulse = true;
+                rig.isKinematic = false;
+                //canRotate = true;
+            }
 
-        //transform.Rotate(Vector3.forward, 180f * Time.time);
-    }
+            //if(canRotate)
+            //{   
+            //    RotateKnife(); 
+            //}
+        }    
+
+        public void FixedUpdate()
+        {
+            if(canImpulse)
+            {
+                KickAndFlip();
+            }      
+        }
+        private void KickAndFlip()
+        {
+            //targetRotation = GetTransformRotation() * Quaternion.Euler(0f, 0f, 180f);
+
+            rig.velocity = jumpForce;
+            rig.AddTorque(Vector3.forward * -torqueValue);
+
+            canImpulse = false;
+        
+        }
+
+        public Quaternion GetTransformRotation()
+        {
+            return transform.rotation;
+        }
+
+
+        //private void RotateKnife()
+        //{
+        //    Debug.Log("entrou");
+        //    // Calcula o progresso da animação de rotação (0 a 1) com base no tempo passado desde o início da animação.
+        //    float progress = Mathf.Clamp01(Time.deltaTime / rotationDuration);
+
+        //    // Utiliza a função Quaternion.RotateTowards para rotacionar gradualmente a faca em direção à rotação inicial.
+        //    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, progress);
+
+        //    // Verifica se a rotação foi concluída (quando a rotação é quase igual à rotação inicial).
+        //    if (Quaternion.Angle(transform.rotation, targetRotation) < 0.1f)
+        //    {
+        //        // Define a rotação exata para a rotação inicial quando a animação estiver concluída.
+        //        transform.rotation = targetRotation;
+        //        canRotate = false;
+        //    }
+        //}
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject.CompareTag("Ground"))
+            {
+                rig.isKinematic = true;
+            }
+
+            SceneManager.LoadScene("Gameplay");
+        }
+
+}
 }
