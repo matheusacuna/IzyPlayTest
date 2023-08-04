@@ -22,9 +22,52 @@ public partial class @MyInputs : IInputActionCollection2, IDisposable
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""MyInputs"",
-    ""maps"": [],
+    ""maps"": [
+        {
+            ""name"": ""Knife"",
+            ""id"": ""0a03bada-c87a-405c-be01-a36747086382"",
+            ""actions"": [
+                {
+                    ""name"": ""Rotation"",
+                    ""type"": ""Button"",
+                    ""id"": ""7575b2a6-187b-43cf-8847-70e7d3ba0977"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1eb1e1fe-a55b-4398-b85e-eb09dab127ec"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""079d582d-5c26-4528-9ff1-dcae9d456c5d"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        }
+    ],
     ""controlSchemes"": []
 }");
+        // Knife
+        m_Knife = asset.FindActionMap("Knife", throwIfNotFound: true);
+        m_Knife_Rotation = m_Knife.FindAction("Rotation", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -79,5 +122,42 @@ public partial class @MyInputs : IInputActionCollection2, IDisposable
     public int FindBinding(InputBinding bindingMask, out InputAction action)
     {
         return asset.FindBinding(bindingMask, out action);
+    }
+
+    // Knife
+    private readonly InputActionMap m_Knife;
+    private IKnifeActions m_KnifeActionsCallbackInterface;
+    private readonly InputAction m_Knife_Rotation;
+    public struct KnifeActions
+    {
+        private @MyInputs m_Wrapper;
+        public KnifeActions(@MyInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Rotation => m_Wrapper.m_Knife_Rotation;
+        public InputActionMap Get() { return m_Wrapper.m_Knife; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(KnifeActions set) { return set.Get(); }
+        public void SetCallbacks(IKnifeActions instance)
+        {
+            if (m_Wrapper.m_KnifeActionsCallbackInterface != null)
+            {
+                @Rotation.started -= m_Wrapper.m_KnifeActionsCallbackInterface.OnRotation;
+                @Rotation.performed -= m_Wrapper.m_KnifeActionsCallbackInterface.OnRotation;
+                @Rotation.canceled -= m_Wrapper.m_KnifeActionsCallbackInterface.OnRotation;
+            }
+            m_Wrapper.m_KnifeActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Rotation.started += instance.OnRotation;
+                @Rotation.performed += instance.OnRotation;
+                @Rotation.canceled += instance.OnRotation;
+            }
+        }
+    }
+    public KnifeActions @Knife => new KnifeActions(this);
+    public interface IKnifeActions
+    {
+        void OnRotation(InputAction.CallbackContext context);
     }
 }
