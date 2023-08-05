@@ -13,23 +13,18 @@ namespace Player
         [Header("Values Knife")]    
         public Vector3 directionKnife;
         public float jumpForce;
+        public float kickForceMultiplier;
         private bool canImpulse = false;
-        public Quaternion targetRotation;
-        public float rotationSpeed;
     
         private Rigidbody rig;
-        private bool canRotate = false;
-        [SerializeField]private bool isRotating;
-
+        private bool isRotating;
         private float initialRotationZ;
 
         void Start()
         {
             rig = GetComponent<Rigidbody>();
 
-            rig.isKinematic = true;
-
-           
+            rig.isKinematic = true;     
         }
 
         void Update()
@@ -39,12 +34,9 @@ namespace Player
                 initialRotationZ = transform.localEulerAngles.z;
                 canImpulse = true;
                 isRotating = true;
-                //rig.isKinematic = false;  
-
+                rig.isKinematic = false;  
                 RotateKnife();
-            }
-
-                  
+            }       
         }
 
         public void FixedUpdate()
@@ -56,9 +48,20 @@ namespace Player
         }
         private void KickAndFlip()
         {
-            rig.AddForce(jumpForce * directionKnife, ForceMode.Impulse);
+            float verticalVelocity = rig.velocity.y;
 
-            canImpulse = false;    
+            // Se o objeto estiver indo para cima, aplicamos a força normalmente
+            if (verticalVelocity >= 0)
+            {
+                rig.AddForce(jumpForce * directionKnife, ForceMode.Impulse);
+            }
+            else if(verticalVelocity < 0)
+            {
+                // Se o objeto estiver caindo, aumentamos a força para compensar a gravidade
+                rig.AddForce(jumpForce * kickForceMultiplier * directionKnife, ForceMode.Impulse);
+            }
+
+            canImpulse = false;
         }
 
         public Quaternion GetTransformRotation()
@@ -66,13 +69,10 @@ namespace Player
             return transform.rotation;
         }
 
-
         private void RotateKnife()
         {
-            Debug.Log("ta rodando a faca");
-
             float targetRotationZ = initialRotationZ - 360f;
-            // Gira a faca no local com uma rotação de 360 graus em torno do eixo Z.
+            
             transform.DOLocalRotate(new Vector3(0f, 0f, targetRotationZ), .5f, RotateMode.FastBeyond360)
             .SetEase(Ease.OutQuad)
             .OnComplete(() => {
