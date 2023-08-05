@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7160133760414189503}
   - component: {fileID: 7160133760414189500}
   - component: {fileID: 7160133760414189501}
+  - component: {fileID: 1311506042}
   m_Layer: 0
   m_Name: Multiplier2
   m_TagString: MultiplierObject
@@ -98,6 +99,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1311506042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7160133760414189490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3ef4ad54d0cd994f8f277a2c3c1e414, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  valueMultiplier: 15
 --- !u!1 &7160133761643544943
 GameObject:
   m_ObjectHideFlags: 0

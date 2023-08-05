@@ -1,3 +1,4 @@
+using Manager;
 using UnityEngine;
 
 namespace Player
@@ -16,6 +17,11 @@ namespace Player
             {
                 rig.isKinematic = true;
             
+            }
+
+            if(other.gameObject.CompareTag("MultiplierObject"))
+            {
+                GameManager.ACT_VictoryGame();
             }
         }
     }
