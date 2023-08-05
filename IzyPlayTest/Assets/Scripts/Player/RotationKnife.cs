@@ -1,16 +1,21 @@
 using UnityEngine;
 using DG.Tweening;
 using Managers;
+using Cinemachine;
 
 namespace Player
 {
     public class RotationKnife : MonoBehaviour
     {
-        [Header("Scripts Reference")]
-        [SerializeField] private MyInputsManager myInputsManager;
-        [SerializeField] private BindKnife bindKnife;
+        [Header("Virtual Camera")]
+        [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
-        [Header("Values Knife")]    
+        [Header("Scripts Reference")]
+        public MyInputsManager myInputsManager;
+        public BindKnife bindKnife;
+
+        [Header("Values Knife")]
+        public Knife knife;
         public Vector3 directionKnife;
         public float jumpForce;
         public float xDirection;
@@ -24,8 +29,10 @@ namespace Player
         void Start()
         {
             rig = GetComponent<Rigidbody>();
+            virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+            rig.isKinematic = true;
 
-            rig.isKinematic = true;     
+            SetupKnife();
         }
 
         void Update()
@@ -46,10 +53,19 @@ namespace Player
 
             if (canImpulse)
             {
-                KickAndFlip();
+                Kick();
             }      
         }
-        private void KickAndFlip()
+
+        private void SetupKnife()
+        {
+            directionKnife = knife.directionKnife;
+            jumpForce = knife.jumpForce;
+            xDirection = knife.xDirection;
+            speedXDirection = knife.speedXDirection;
+            virtualCamera.Follow = transform;
+        }
+        private void Kick()
         {
             rig.velocity = Vector3.up * jumpForce;
 

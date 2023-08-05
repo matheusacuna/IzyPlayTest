@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using Player;
 
 namespace Managers
 {
@@ -10,6 +11,7 @@ namespace Managers
     {
         [Header("Scripts Reference")]
         [SerializeField] private ScoreManager scoreManager;
+        public GameObject rotationKnife;
 
         [Header("Settings Victory")]
         [SerializeField] private GameObject modalVictory;
@@ -21,6 +23,7 @@ namespace Managers
 
         public static Action ACT_VictoryGame;
         public static Action ACT_LoserGame;
+
         private void OnEnable()
         {
             ACT_VictoryGame += VictoryGame;
@@ -35,11 +38,13 @@ namespace Managers
         public void VictoryGame()
         {
             StartCoroutine(ModalVictoryGame());
+            DisableKnifeComponente();
         }
 
         public void LoserGame()
         {
             modalLoser.SetActive(true);
+            DisableKnifeComponente();
         }
 
         public IEnumerator ModalVictoryGame()
@@ -48,7 +53,11 @@ namespace Managers
             yield return new WaitForSeconds(1f);
             currentScoreTex.text = scoreManager.currentScore.ToString();
             totalScoreTex.text = scoreManager.finalScore.ToString();
+        }
 
+        private void DisableKnifeComponente()
+        {
+            rotationKnife.GetComponent<RotationKnife>().enabled = false;
         }
     }
 }

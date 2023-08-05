@@ -7,7 +7,7 @@ namespace Player
     {
         private Rigidbody rig;
         public ParticleSystem confettiVFX;
-    
+        
         private void Start()
         {
             rig = GetComponentInParent<Rigidbody>();
@@ -16,8 +16,7 @@ namespace Player
         {
             if(other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("MultiplierObject"))
             {
-                rig.isKinematic = true;
-            
+                rig.isKinematic = true; 
             }
 
             if(other.gameObject.CompareTag("MultiplierObject"))
