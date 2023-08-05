@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 
 namespace Player
@@ -9,38 +10,42 @@ namespace Player
         [Header("Inputs")]
         [SerializeField] private MyInputsManager myInputsManager;
 
-        [Header("Values Knife")]
-        public float rotationDuration;
-        public float torqueValue;    
-        public Vector2 jumpForce;
+        [Header("Values Knife")]    
+        public Vector3 directionKnife;
+        public float jumpForce;
         private bool canImpulse = false;
+        public Quaternion targetRotation;
+        public float rotationSpeed;
     
         private Rigidbody rig;
         private bool canRotate = false;
-        private Quaternion targetRotation;
-    
+        [SerializeField]private bool isRotating;
+
+        private float initialRotationZ;
+
         void Start()
         {
             rig = GetComponent<Rigidbody>();
 
             rig.isKinematic = true;
+
+           
         }
 
-        // Update is called once per frame
         void Update()
         {
-            if (myInputsManager.myInputs.Knife.Rotation.triggered)
+            if (myInputsManager.myInputs.Knife.Rotation.triggered && !isRotating)
             {
+                initialRotationZ = transform.localEulerAngles.z;
                 canImpulse = true;
-                rig.isKinematic = false;
-                //canRotate = true;
+                isRotating = true;
+                //rig.isKinematic = false;  
+
+                RotateKnife();
             }
 
-            //if(canRotate)
-            //{   
-            //    RotateKnife(); 
-            //}
-        }    
+                  
+        }
 
         public void FixedUpdate()
         {
@@ -51,13 +56,9 @@ namespace Player
         }
         private void KickAndFlip()
         {
-            //targetRotation = GetTransformRotation() * Quaternion.Euler(0f, 0f, 180f);
+            rig.AddForce(jumpForce * directionKnife, ForceMode.Impulse);
 
-            rig.velocity = jumpForce;
-            rig.AddTorque(Vector3.forward * -torqueValue);
-
-            canImpulse = false;
-        
+            canImpulse = false;    
         }
 
         public Quaternion GetTransformRotation()
@@ -66,33 +67,19 @@ namespace Player
         }
 
 
-        //private void RotateKnife()
-        //{
-        //    Debug.Log("entrou");
-        //    // Calcula o progresso da animação de rotação (0 a 1) com base no tempo passado desde o início da animação.
-        //    float progress = Mathf.Clamp01(Time.deltaTime / rotationDuration);
-
-        //    // Utiliza a função Quaternion.RotateTowards para rotacionar gradualmente a faca em direção à rotação inicial.
-        //    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, progress);
-
-        //    // Verifica se a rotação foi concluída (quando a rotação é quase igual à rotação inicial).
-        //    if (Quaternion.Angle(transform.rotation, targetRotation) < 0.1f)
-        //    {
-        //        // Define a rotação exata para a rotação inicial quando a animação estiver concluída.
-        //        transform.rotation = targetRotation;
-        //        canRotate = false;
-        //    }
-        //}
-
-        private void OnTriggerEnter(Collider other)
+        private void RotateKnife()
         {
-            if(other.gameObject.CompareTag("Ground"))
-            {
-                rig.isKinematic = true;
-            }
+            Debug.Log("ta rodando a faca");
 
-            SceneManager.LoadScene("Gameplay");
+            float targetRotationZ = initialRotationZ - 360f;
+            // Gira a faca no local com uma rotação de 360 graus em torno do eixo Z.
+            transform.DOLocalRotate(new Vector3(0f, 0f, targetRotationZ), .5f, RotateMode.FastBeyond360)
+            .SetEase(Ease.OutQuad)
+            .OnComplete(() => {
+                transform.localEulerAngles = new Vector3(0f, 0f, targetRotationZ);
+                isRotating = false;
+            });
         }
+    }
+}
 
-}
-}
