@@ -1,24 +1,27 @@
 using UnityEngine;
 using Managers;
 
-public class Blade : MonoBehaviour
+namespace Player
 {
-    private Rigidbody rig;
-    private void Start()
+    public class Blade : MonoBehaviour
     {
-        rig = GetComponent<Rigidbody>();
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.CompareTag("ObjectsToSlicer"))
+        private Rigidbody rig;
+        private void Start()
         {
-            other.GetComponent<CutObjects>().ApplyDestroyEffect();
+            rig = GetComponent<Rigidbody>();
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject.CompareTag("ObjectsToSlicer"))
+            {
+                other.GetComponent<CutObjects>().ApplyDestroyEffect();
 
-            if(!other.GetComponent<CutObjects>().isDivided)
-            { 
-                ScoreManager.ACT_IncrementScore(10);
-                other.GetComponent<CutObjects>().isDivided = true;
-            }      
+                if(!other.GetComponent<CutObjects>().isDivided)
+                { 
+                    ScoreManager.ACT_IncrementScore(10);
+                    other.GetComponent<CutObjects>().isDivided = true;
+                }      
+            }
         }
     }
 }
