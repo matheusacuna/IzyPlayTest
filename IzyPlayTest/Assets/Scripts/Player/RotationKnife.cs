@@ -1,20 +1,23 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 
 namespace Player
 {
     public class RotationKnife : MonoBehaviour
     {
-        [Header("Inputs")]
+        [Header("Scripts Reference")]
         [SerializeField] private MyInputsManager myInputsManager;
+        [SerializeField] private BindKnife bindKnife;
 
         [Header("Values Knife")]    
         public Vector3 directionKnife;
         public float jumpForce;
-        public float kickForceMultiplier;
-        private bool canImpulse = false;
+        public float xDirection;
+        public float speedXDirection;
     
+        private bool canImpulse = false;
         private Rigidbody rig;
         private bool isRotating;
         private float initialRotationZ;
@@ -40,26 +43,20 @@ namespace Player
 
         public void FixedUpdate()
         {
-            if(canImpulse)
+            rig.velocity = new Vector3(speedXDirection * xDirection, rig.velocity.y, 0f);
+
+            if (canImpulse)
             {
                 KickAndFlip();
             }      
         }
         private void KickAndFlip()
         {
-            float verticalVelocity = rig.velocity.y;
-
-            if (verticalVelocity >= 0)
-            {
-                rig.AddForce(jumpForce * directionKnife, ForceMode.Impulse);
-            }
-            else if(verticalVelocity < 0)
-            {
-                rig.AddForce(jumpForce * kickForceMultiplier * directionKnife, ForceMode.Impulse);
-            }
+            rig.velocity = Vector3.up * jumpForce;
 
             canImpulse = false;
         }
+
 
         public Quaternion GetTransformRotation()
         {
@@ -70,7 +67,7 @@ namespace Player
         {
             float targetRotationZ = initialRotationZ - 360f;
             
-            transform.DOLocalRotate(new Vector3(0f, 0f, targetRotationZ), .5f, RotateMode.FastBeyond360)
+            transform.DOLocalRotate(new Vector3(0f, 0f, targetRotationZ), .7f, RotateMode.FastBeyond360)
             .SetEase(Ease.OutQuad)
             .OnComplete(() => {
                 transform.localEulerAngles = new Vector3(0f, 0f, targetRotationZ);
@@ -78,13 +75,13 @@ namespace Player
             });
         }
 
-        //private void OnTriggerEnter(Collider other)
-        //{
-        //    if(other.gameObject.CompareTag("Ground"))
-        //    {
-        //        rig.isKinematic = true;
-        //    }
-        //}
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject.CompareTag("Ground"))
+            {
+                SceneManager.LoadScene("Gameplay");
+            }
+        }
     }
 }
 

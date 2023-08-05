@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7160133760414189500}
   - component: {fileID: 7160133760414189501}
   m_Layer: 0
-  m_Name: Multiplier1
+  m_Name: Multiplier4
   m_TagString: MultiplierObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 7160133760414189490}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 15.716354, y: 1.019, z: 7.893}
-  m_LocalScale: {x: 1, y: 0.44642, z: 1}
+  m_LocalScale: {x: 1, y: 0.9818116, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7160133761797575553}
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 51baf2117cfe41e408a957167fcafcc2, type: 2}
+  - {fileID: 2100000, guid: cc6b30f74fad1d546bf612fa00ac6996, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 30
+  m_text: 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

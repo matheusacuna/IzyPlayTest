@@ -8,6 +8,7 @@ namespace Managers
     {
         [Header("Score Settings")]
         [SerializeField] private int currentScore;
+        [SerializeField] private int finalScore;
         public TextMeshProUGUI scoreText;
 
         public static Action<int> ACT_IncrementScore;
@@ -32,6 +33,11 @@ namespace Managers
             //Vector3 originalScale = scoreText.transform.localScale;
             //scoreText.transform.DOPunchScale(new Vector3(2, 2, 2), .2f);
             //scoreText.transform.DOScale(originalScale, .2f).SetDelay(.2f);
+        }
+
+        public void ScoreFinal(int multiplier)
+        {
+            finalScore = currentScore * multiplier;
         }
     }
 }

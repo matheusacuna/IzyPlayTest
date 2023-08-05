@@ -4,7 +4,12 @@ public class CutObjects : MonoBehaviour
 {
     [SerializeField] private Rigidbody[] rig;
     [SerializeField] private Transform center;
-    
+    public bool isDivided;
+
+    private void Start()
+    {
+        isDivided = false;
+    }
     public void ApplyDestroyEffect()
     {
         foreach (Rigidbody rigs in rig)
