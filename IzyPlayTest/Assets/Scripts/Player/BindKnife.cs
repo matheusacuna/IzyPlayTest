@@ -1,4 +1,4 @@
-using Manager;
+using Managers;
 using UnityEngine;
 
 namespace Player
@@ -6,6 +6,7 @@ namespace Player
     public class BindKnife : MonoBehaviour
     {
         private Rigidbody rig;
+        public ParticleSystem confettiVFX;
     
         private void Start()
         {
@@ -22,6 +23,7 @@ namespace Player
             if(other.gameObject.CompareTag("MultiplierObject"))
             {
                 GameManager.ACT_VictoryGame();
+                confettiVFX.Play();
             }
         }
     }

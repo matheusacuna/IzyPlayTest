@@ -1,7 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.SceneManagement;
-
+using Managers;
 
 namespace Player
 {
@@ -79,7 +78,7 @@ namespace Player
         {
             if(other.gameObject.CompareTag("Ground"))
             {
-                SceneManager.LoadScene("Gameplay");
+                GameManager.ACT_LoserGame();
             }
         }
     }

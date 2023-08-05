@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using TMPro;
-using System.Collections;
 
 namespace Managers
 {
@@ -38,11 +37,6 @@ namespace Managers
             //scoreText.transform.DOPunchScale(new Vector3(2, 2, 2), .2f);
             //scoreText.transform.DOScale(originalScale, .2f).SetDelay(.2f);
         }
-
-        //public void ScoreFinalAction(int multiplier)
-        //{
-        //    StartCoroutine(ScoreFinal(multiplier));
-        //}
 
         public void ScoreFinal(int multiplier)
         {

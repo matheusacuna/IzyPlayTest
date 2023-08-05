@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 
-namespace Manager
+namespace Managers
 {
     public class GameManager : MonoBehaviour
     {
@@ -15,6 +15,9 @@ namespace Manager
         [SerializeField] private GameObject modalVictory;
         [SerializeField] private TextMeshProUGUI currentScoreTex;
         [SerializeField] private TextMeshProUGUI totalScoreTex;
+
+        [Header("Settings Loser")]
+        [SerializeField] private GameObject modalLoser;
 
         public static Action ACT_VictoryGame;
         public static Action ACT_LoserGame;
@@ -36,7 +39,7 @@ namespace Manager
 
         public void LoserGame()
         {
-            Debug.Log("poxa vc perdeu");
+            modalLoser.SetActive(true);
         }
 
         public IEnumerator ModalVictoryGame()

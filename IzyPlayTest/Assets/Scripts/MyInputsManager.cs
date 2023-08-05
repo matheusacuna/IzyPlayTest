@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public class MyInputsManager : MonoBehaviour
+namespace Managers 
 {
-    public MyInputs myInputs;
-
-    private void Awake()
+    public class MyInputsManager : MonoBehaviour
     {
-        myInputs = new MyInputs();
-    }
+        public MyInputs myInputs;
 
-    private void OnEnable()
-    {
-        myInputs.Enable();
-    }
+        private void Awake()
+        {
+            myInputs = new MyInputs();
+        }
 
-    private void OnDisable()
-    {
-        myInputs.Disable();
+        private void OnEnable()
+        {
+            myInputs.Enable();
+        }
+
+        private void OnDisable()
+        {
+            myInputs.Disable();
+        }
     }
 }
