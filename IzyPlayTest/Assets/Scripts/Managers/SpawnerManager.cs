@@ -15,7 +15,10 @@ namespace Managers
         }
         public void SpawnObstacles()
         {
-            GameObject obj = Instantiate(prefabObstacle, wayPoints[Random.Range(0, wayPoints.Count)]);
+            for (int i = 0; i < wayPoints.Count + 1; i++)
+            {
+                Instantiate(prefabObstacle, wayPoints[Random.Range(0, wayPoints.Count)].position, transform.rotation);
+            }
         }
     }
 }
