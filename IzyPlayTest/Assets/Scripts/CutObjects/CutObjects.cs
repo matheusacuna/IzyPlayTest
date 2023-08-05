@@ -5,7 +5,6 @@ using UnityEngine;
 public class CutObjects : MonoBehaviour
 {
     [SerializeField] private Rigidbody[] rig;
-    [SerializeField] private BoxCollider[] colliders;
     [SerializeField] private Transform center;
     
     public void ApplyDestroyEffect()

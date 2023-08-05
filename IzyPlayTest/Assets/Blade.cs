@@ -9,6 +9,7 @@ public class Blade : MonoBehaviour
         if(other.gameObject.CompareTag("ObjectsToSlicer"))
         {
             other.GetComponent<CutObjects>().ApplyDestroyEffect();
+            ScoreManager.ACT_IncrementScore(10);
         }
     }
 }

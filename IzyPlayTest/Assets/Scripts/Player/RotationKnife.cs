@@ -50,14 +50,12 @@ namespace Player
         {
             float verticalVelocity = rig.velocity.y;
 
-            // Se o objeto estiver indo para cima, aplicamos a força normalmente
             if (verticalVelocity >= 0)
             {
                 rig.AddForce(jumpForce * directionKnife, ForceMode.Impulse);
             }
             else if(verticalVelocity < 0)
             {
-                // Se o objeto estiver caindo, aumentamos a força para compensar a gravidade
                 rig.AddForce(jumpForce * kickForceMultiplier * directionKnife, ForceMode.Impulse);
             }
 
@@ -80,6 +78,14 @@ namespace Player
                 isRotating = false;
             });
         }
+
+        //private void OnTriggerEnter(Collider other)
+        //{
+        //    if(other.gameObject.CompareTag("Ground"))
+        //    {
+        //        rig.isKinematic = true;
+        //    }
+        //}
     }
 }
 
