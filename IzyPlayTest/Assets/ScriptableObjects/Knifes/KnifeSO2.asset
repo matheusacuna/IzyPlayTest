@@ -18,3 +18,4 @@ MonoBehaviour:
   jumpForce: 6
   xDirection: 1.2
   speedXDirection: 1.5
+  knifeName: Knife Green

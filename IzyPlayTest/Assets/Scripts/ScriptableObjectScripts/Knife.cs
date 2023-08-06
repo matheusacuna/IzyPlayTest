@@ -9,5 +9,8 @@ public class Knife : ScriptableObject
     public float jumpForce;
     public float xDirection;
     public float speedXDirection;
+    public string knifeName;
+    //public Sprite iconKnife;
+    
 
 }

@@ -1,5 +1,6 @@
 using Managers;
 using Player;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ namespace Player
         public Knife knife;
         public Transform spawnTransformKnife;
         public GameObject modalOptionsKnife;
+        public Image iconColor;
+        public TextMeshProUGUI nameKnife;
 
         private Button button;
         private MyInputsManager myInputsManager;

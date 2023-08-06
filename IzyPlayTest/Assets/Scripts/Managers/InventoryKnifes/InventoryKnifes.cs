@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Player
 {
@@ -26,6 +27,7 @@ namespace Player
                 obj.GetComponent<SetupKnife>().knife = knifeList[i];
                 obj.GetComponent<SetupKnife>().spawnTransformKnife = spawnTransformKnife;
                 obj.GetComponent<SetupKnife>().modalOptionsKnife = modalOptionsKnife;
+                obj.GetComponent<SetupKnife>().nameKnife.text = knifeList[i].knifeName;
             }
         }
     }

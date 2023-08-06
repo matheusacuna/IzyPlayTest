@@ -56,7 +56,6 @@ namespace Managers
                     instance.audioSourceSFX.pitch = pitch;
                     instance.audioSourceSFX.volume = volume;
                     instance.audioSourceSFX.clip = instance.soundsDatabase[i].audioClip;
-                    //instance.audioSource.Play();
                     instance.audioSourceSFX.PlayOneShot(instance.soundsDatabase[i].audioClip);
                 }
             }
