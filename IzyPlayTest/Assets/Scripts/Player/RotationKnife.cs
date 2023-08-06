@@ -70,6 +70,7 @@ namespace Player
             rig.velocity = Vector3.up * jumpForce;
 
             canImpulse = false;
+            SoundManager.PlaySoundEffect(SoundsType.SoundEffect, "KnifeWhoosh");
         }
 
 

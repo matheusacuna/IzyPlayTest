@@ -59,5 +59,10 @@ namespace Managers
         {
             rotationKnife.GetComponent<RotationKnife>().enabled = false;
         }
+
+        public void ChangeTimeScale(float valueTime)
+        {
+            Time.timeScale = valueTime;
+        }
     }
 }

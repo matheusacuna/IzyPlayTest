@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Tables
+  m_EditorClassIdentifier: 
+  m_GroupName: Tables
+  m_Data:
+    m_SerializedData: []
+  m_GUID: bcce4bd2ac84c6c46ad0add7dabc0a4c
+  m_SerializeEntries:
+  - m_GUID: c9d590f6afa11e64fbb8fc64f7c1fd50
+    m_Address: Assets/Prefabs/Tables.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - tables
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 79672e0a0a56c4f44b3ef30768bcdf75, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 389b6ec0131907d47aad6a7da2d2291c, type: 2}
+    - {fileID: 11400000, guid: a2abfe1e9fa67fa46996971ea64719a5, type: 2}
