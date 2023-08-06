@@ -11,6 +11,8 @@ namespace Player
             {
                 other.GetComponent<CutObjects>().ApplyDestroyEffect();
 
+                SoundManager.PlaySoundEffect(SoundsType.SoundEffect, "BrickBreaking", .9f,.2f);
+
                 if(!other.GetComponent<CutObjects>().isDivided)
                 { 
                     ScoreManager.ACT_IncrementScore(10);

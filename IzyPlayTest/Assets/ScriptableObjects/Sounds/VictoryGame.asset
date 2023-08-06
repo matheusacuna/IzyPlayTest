@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c6952ee2a538e647914e4e0b921fb48, type: 3}
+  m_Name: VictoryGame
+  m_EditorClassIdentifier: 
+  soundsType: 1
+  nameSound: VictoryGame
+  audioClip: {fileID: 8300000, guid: 4fd20dc130809a341b4682d6e6718a5a, type: 3}

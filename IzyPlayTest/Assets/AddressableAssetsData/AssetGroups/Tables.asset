@@ -17,11 +17,16 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: bcce4bd2ac84c6c46ad0add7dabc0a4c
   m_SerializeEntries:
-  - m_GUID: c9d590f6afa11e64fbb8fc64f7c1fd50
-    m_Address: Assets/Prefabs/Tables.prefab
+  - m_GUID: 1126fb17a37611d4e8e1da70a237bce9
+    m_Address: Assets/Prefabs/Roulette.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - tables
+    - Obstacle
+  - m_GUID: c9d590f6afa11e64fbb8fc64f7c1fd50
+    m_Address: Assets/Prefabs/TablesTest.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Obstacle
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 79672e0a0a56c4f44b3ef30768bcdf75, type: 2}
   m_SchemaSet:

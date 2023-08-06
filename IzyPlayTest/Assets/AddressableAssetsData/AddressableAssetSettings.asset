@@ -86,6 +86,7 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - tables
+    - Obstacle
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: a42adce02cc24764aa6be3268e324e1f, type: 2}

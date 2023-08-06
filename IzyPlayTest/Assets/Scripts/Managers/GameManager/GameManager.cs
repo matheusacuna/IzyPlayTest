@@ -50,6 +50,7 @@ namespace Managers
         public IEnumerator ModalVictoryGame()
         {
             modalVictory.SetActive(true);
+            SoundManager.PlaySoundEffect(SoundsType.SoundEffect, "VictoryGame");
             yield return new WaitForSeconds(1f);
             currentScoreTex.text = scoreManager.currentScore.ToString();
             totalScoreTex.text = scoreManager.finalScore.ToString();

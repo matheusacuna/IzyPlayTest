@@ -11,16 +11,11 @@ namespace Managers
         public List<Transform> wayPoints = new List<Transform>();
         private List<GameObject> instantiatedObstacles = new List<GameObject>();
 
-        public Dictionary<string, GameObject> resources;
+        private Dictionary<string, GameObject> resources;
 
-        private void Awake()
+        private void Start()
         {
             StartCoroutine(InitializeLoadPathAssets());
-        }
-
-        public void Start()
-        {
-            StartCoroutine(SpawnObstacles());
         }
 
         public void DestroyAllObstacles()
@@ -28,7 +23,6 @@ namespace Managers
             foreach (var obstacle in instantiatedObstacles)
             {
                 Addressables.ReleaseInstance(obstacle);
-
                 Destroy(obstacle);
             }
 
@@ -39,7 +33,7 @@ namespace Managers
         {
             resources = new Dictionary<string, GameObject>();
 
-            AsyncOperationHandle<IList<GameObject>> handle = Addressables.LoadAssetsAsync<GameObject>("tables", null);
+            AsyncOperationHandle<IList<GameObject>> handle = Addressables.LoadAssetsAsync<GameObject>("Obstacle", null);
             yield return handle;
 
             if (handle.Status == AsyncOperationStatus.Succeeded)
@@ -48,50 +42,67 @@ namespace Managers
 
                 foreach (GameObject obj in loadedObjects)
                 {
-
                     if (!resources.ContainsKey(obj.name))
                     {
                         resources.Add(obj.name, obj);
                     }
                 }
+
+                StartCoroutine(SpawnObstacles());
             }
         }
 
-
         public IEnumerator SpawnObstacles()
         {
-            while (resources == null)
+            while (resources == null || resources.Count == 0)
             {
                 yield return null;
             }
 
-            var handle = Addressables.LoadAssetAsync<GameObject>("tables");
-            yield return handle;
+            List<int> usedIndices = new List<int>();
 
-            if (handle.Status == AsyncOperationStatus.Succeeded)
+            foreach (Transform wayPoint in wayPoints)
             {
-                GameObject prefabObstacle = handle.Result;
+                int randomIndex = Random.Range(0, wayPoints.Count);
 
-                List<int> usedIndices = new List<int>();
-
-                for (int i = 0; i < wayPoints.Count; i++)
+                while (usedIndices.Contains(randomIndex))
                 {
-                    int randomIndex = Random.Range(0, wayPoints.Count);
+                    randomIndex = Random.Range(0, wayPoints.Count);
+                }
 
-                    while (usedIndices.Contains(randomIndex))
-                    {
-                        randomIndex = Random.Range(0, wayPoints.Count);
-                    }
+                usedIndices.Add(randomIndex);
 
-                    usedIndices.Add(randomIndex);
+                if (resources.Count > 0)
+                {
+                    string randomObstacleName = GetRandomDictionaryKey(resources);
+                    GameObject prefabObstacle = resources[randomObstacleName];
 
                     GameObject prefabObstacleInstantieded = Instantiate(prefabObstacle, wayPoints[randomIndex].position, transform.rotation);
                     instantiatedObstacles.Add(prefabObstacleInstantieded);
                 }
             }
         }
+
+        private string GetRandomDictionaryKey(Dictionary<string, GameObject> dictionary)
+        {
+            int randomIndex = Random.Range(0, dictionary.Count);
+            int currentIndex = 0;
+
+            foreach (string key in dictionary.Keys)
+            {
+                if (currentIndex == randomIndex)
+                {
+                    return key;
+                }
+
+                currentIndex++;
+            }
+
+            return null;
+        }
     }
 }
+
 
 
 

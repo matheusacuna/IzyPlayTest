@@ -177,8 +177,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.09536089, y: 0.23377502, z: 0.052859306}
-  m_Center: {x: -0.002319552, y: 0.17496686, z: 0.004998684}
+  m_Size: {x: 0.09536089, y: 0.18532844, z: 0.052859306}
+  m_Center: {x: -0.002319552, y: 0.19919108, z: 0.004998684}
 --- !u!114 &2781644200744677914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,8 +191,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b23d3cb40d3782e42a412b9a4d9e1461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 0}
   myInputsManager: {fileID: 0}
   bindKnife: {fileID: 2781644200400078705}
+  knife: {fileID: 0}
   directionKnife: {x: 0.2, y: 3, z: 0}
   jumpForce: 6
   xDirection: 1.2
@@ -5217,6 +5219,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2781644200744677916}
     m_Modifications:
+    - target: {fileID: 2781644201231253127, guid: 7686c2a7e887a6f45b995031b8140c9d,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.00037366818
+      objectReference: {fileID: 0}
+    - target: {fileID: 2781644201231253127, guid: 7686c2a7e887a6f45b995031b8140c9d,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.00044533424
+      objectReference: {fileID: 0}
+    - target: {fileID: 2781644201231253127, guid: 7686c2a7e887a6f45b995031b8140c9d,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.000013604292
+      objectReference: {fileID: 0}
     - target: {fileID: 6730130307959391096, guid: 7686c2a7e887a6f45b995031b8140c9d,
         type: 3}
       propertyPath: m_Name
