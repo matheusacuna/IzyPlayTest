@@ -19,6 +19,7 @@ namespace Player
             CreateDisplayOptionsKnife();
         }
 
+        //Função responsável por mostrar na UI quais facas temos disponíveis para usar antes de começar a partida.
         public void CreateDisplayOptionsKnife()
         {
             for (int i = 0; i < knifeList.Count; i++)

@@ -5,6 +5,8 @@ namespace Player
 {
     public class Blade : MonoBehaviour
     {
+        //Caso a faca esteja encostando em um objeto com a tag ObjectsToSlicer ele chama a função responsável
+        //por dividi-los ao meio.
         private void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.CompareTag("ObjectsToSlicer"))

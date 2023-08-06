@@ -10,6 +10,8 @@ public class CutObjects : MonoBehaviour
     {
         isDivided = false;
     }
+
+    //Função que aplica um AddExplosion no meio dos objetos causando o efeito de corte quando a faca encostar nos mesmos.
     public void ApplyDestroyEffect()
     {
         foreach (Rigidbody rigs in rig)

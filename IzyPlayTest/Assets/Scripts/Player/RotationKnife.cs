@@ -57,6 +57,7 @@ namespace Player
             }      
         }
 
+        //Seta os valores da faca de acordo com o Scriptable Object passado na variável knife.
         private void SetupKnife()
         {
             directionKnife = knife.directionKnife;
@@ -65,6 +66,8 @@ namespace Player
             speedXDirection = knife.speedXDirection;
             virtualCamera.Follow = transform;
         }
+
+        //Possibilita que a faca vá para frente.
         private void Kick()
         {
             rig.velocity = Vector3.up * jumpForce;
@@ -79,6 +82,7 @@ namespace Player
             return transform.rotation;
         }
 
+        //Função responsável por girar a faca em 360 graus.
         private void RotateKnife()
         {
             float targetRotationZ = initialRotationZ - 360f;

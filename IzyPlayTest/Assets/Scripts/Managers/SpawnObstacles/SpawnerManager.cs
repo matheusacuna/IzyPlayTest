@@ -18,6 +18,7 @@ namespace Managers
             StartCoroutine(InitializeLoadPathAssets());
         }
 
+        //Esta função destrói todos os obstaculos instanciados.
         public void DestroyAllObstacles()
         {
             foreach (var obstacle in instantiatedObstacles)
@@ -29,6 +30,7 @@ namespace Managers
             instantiatedObstacles.Clear();
         }
 
+        //Carrega os endereços dos Addressables que contem a lable Obstacle
         public IEnumerator InitializeLoadPathAssets()
         {
             resources = new Dictionary<string, GameObject>();
@@ -52,6 +54,7 @@ namespace Managers
             }
         }
 
+        //Spawna os obstáculos que sejam referente aos endereços que foram carregados. 
         public IEnumerator SpawnObstacles()
         {
             while (resources == null || resources.Count == 0)
@@ -83,6 +86,7 @@ namespace Managers
             }
         }
 
+        //Obtem de forma aleatória uma chave do nosso dicionario possibilitando a randomização no Spawn de Obstaculos
         private string GetRandomDictionaryKey(Dictionary<string, GameObject> dictionary)
         {
             int randomIndex = Random.Range(0, dictionary.Count);

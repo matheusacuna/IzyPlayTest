@@ -22,7 +22,7 @@ public class DATASounds : MonoBehaviour
             Destroy(gameObject);
         }
 
-
+        //Verifica se a chave passada existe para poder obter ou setar o valor das variáveis de som.
         if (PlayerPrefs.HasKey("SaveVolumeMusic"))
             volumeMusic = PlayerPrefs.GetFloat("SaveVolumeMusic");
         else

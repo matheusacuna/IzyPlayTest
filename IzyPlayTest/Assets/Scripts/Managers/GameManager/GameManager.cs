@@ -7,6 +7,7 @@ using Player;
 
 namespace Managers
 {
+    //Classe responsável por criar as Actions responsáveis por chamar as funções de Vitoria e Derrota
     public class GameManager : MonoBehaviour
     {
         [Header("Scripts Reference")]

@@ -11,6 +11,7 @@ namespace Managers
         public int finalScore;
         public TextMeshProUGUI scoreText;
 
+        //Actions criadas com intuitio de chamar suas respectivas funções nos Scripts desejados sem precisar referenciá-los.
         public static Action<int> ACT_IncrementScore;
         public static Action<int> ACT_ScoreFinal;
         private void Update()
@@ -30,14 +31,13 @@ namespace Managers
             ACT_ScoreFinal -= ScoreFinal;
         }
 
+        //Incrementa pontos para o player.
         public void IncrementScore(int value)
         {
             currentScore += value;
-            //Vector3 originalScale = scoreText.transform.localScale;
-            //scoreText.transform.DOPunchScale(new Vector3(2, 2, 2), .2f);
-            //scoreText.transform.DOScale(originalScale, .2f).SetDelay(.2f);
         }
 
+        //Calcula a pontuação final dependendo do valor passando no parâmetro multiplier.
         public void ScoreFinal(int multiplier)
         {
             finalScore = currentScore * multiplier;

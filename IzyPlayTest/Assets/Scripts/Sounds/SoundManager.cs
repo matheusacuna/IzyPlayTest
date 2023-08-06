@@ -34,6 +34,7 @@ namespace Managers
                 Destroy(gameObject);
             }
         }
+        //Função estatica responsável por tocar sons, seja do tipo Music ou SoundEffect
         public static void PlaySoundEffect(SoundsType soundsType, string name, float pitch = 1f, float volume = 0.5f)
         {
             if (instance == null)
